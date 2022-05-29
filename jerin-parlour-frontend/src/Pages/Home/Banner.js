@@ -13,11 +13,9 @@ const Banner = () => {
           <h1 className="text-4xl font-bold uppercase">Beauty Saloon</h1>
           <h1 className="text-4xl font-bold uppercase">for every woman</h1>
           <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+           Jerins parolour proudly been one of the pioneers beauty related servies in Bangladesh.
           </p>
-          <button className="btn btn-primary">Get Started</button>
+          <button className="btn btn-primary">Get an appointment</button>
         </div>
       </div>
     </div>

@@ -1,0 +1,44 @@
+[
+    {
+      "picture": "https://i.ibb.co/59nHb73/Group-1372.png",
+      "price": 114,
+      "name": "Anti age face treatment",
+      "shortDescription": "we craft stunning and amazing web ui"
+    },
+    {
+      "picture": "https://i.ibb.co/pXXWVDL/Group-1373.png",
+      "price": 93,
+      "name": "Hair color and styling",
+      "shortDescription": "Hairs can be curly or straight or wavy"
+    },
+    {
+      "picture": "https://i.ibb.co/Q98SHhb/Group-1374.png",
+      "price": 83,
+      "name": "Skin care treatment",
+      "shortDescription": "he first step to good foot care is to remove the hard skin from your feet."
+    },
+    {
+      "picture": "https://i.ibb.co/QfcN7Qd/pic1.png",
+      "price": 79,
+      "name": "MU-Exclusive Bridal Makeup By girls A",
+      "shortDescription": "Everyone wants to look good, especially when it is the time to party."
+    },
+    {
+      "picture": "https://i.ibb.co/px6ZzNr/pic2.png",
+      "price": 115,
+      "name": "MU-Exclusive Bridal Makeup By girls B",
+      "shortDescription": "The idea behind hosting or going to parties is to meet the people you know as well as to make new friends"
+    },
+    {
+      "picture": "https://i.ibb.co/qg79gdN/pic3.png",
+      "price": 65,
+      "name": "MU-Exclusive Party Make Over",
+      "shortDescription": "The self-confidence comes when you know that you are looking perfect, with the right make up and a dazzling ensemble."
+    },
+    {
+        "picture": "https://i.ibb.co/sKzKLdP/pic4.png",
+        "price": 65,
+        "name": "M-Mehendi Wrist",
+        "shortDescription": "Everyone wants to look good, especially when it is the time to party."
+    }
+  ]
