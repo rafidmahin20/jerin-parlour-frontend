@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import Banner from './Banner';
+import Forms from './Forms';
 import ServiceHome from './ServiceHome';
 import Summary from './Summary';
 import Testimonials from './Testimonials';
@@ -15,6 +16,7 @@ const Home = () => {
             <ServiceHome></ServiceHome>
             <Summary></Summary>
             <Testimonials></Testimonials>
+            <Forms></Forms>
         </div>
     );
 };
