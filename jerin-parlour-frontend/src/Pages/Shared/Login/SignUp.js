@@ -1,9 +1,44 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
+import {
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
+import auth from "../Firebase/Firebase.init";
+import { useForm } from "react-hook-form";
+import Loading from "../Loading/Loading";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+  let signInError;
+
+  if (loading || updating) {
+    return <Loading></Loading>;
+  }
+
+  if (error || updateError) {
+    signInError = (
+      <p className="text-red-500">
+        <small>
+          {error?.message ||  updateError?.message}
+        </small>
+      </p>
+    );
+  }
+
+  const onSubmit = async (data) => {
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name });
+  };
   const navigateToSignIn = () => {
     navigate("/login");
   };
@@ -17,7 +52,7 @@ const SignUp = () => {
           Jerins Parlour
         </h1>
 
-        <form className="mt-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
           <div>
             <label
               for="username"
@@ -26,9 +61,22 @@ const SignUp = () => {
               Name
             </label>
             <input
+              {...register("name", {
+                required: {
+                  value: true,
+                  message: "name is required",
+                },
+              })}
               type="name"
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md  dark:text-black dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             />
+            <label className="label">
+              {errors.name?.type === "required" && (
+                <span className="label-text-alt text-red-500">
+                  {errors.name.message}
+                </span>
+              )}
+            </label>
           </div>
           <div>
             <label
@@ -38,9 +86,31 @@ const SignUp = () => {
               Email
             </label>
             <input
+            {...register("email", {
+                required: {
+                  value: true,
+                  message: "Email is Required",
+                },
+                pattern: {
+                  value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                  message: "Provide a valid Email",
+                },
+              })}
               type="email"
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md  dark:text-black dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             />
+            <label className="label">
+                {errors.email?.type === "required" && (
+                  <span className="label-text-alt text-red-500">
+                    {errors.email.message}
+                  </span>
+                )}
+                {errors.email?.type === "pattern" && (
+                  <span className="label-text-alt text-red-500">
+                    {errors.email.message}
+                  </span>
+                )}
+              </label>
           </div>
 
           <div className="mt-4">
@@ -54,10 +124,33 @@ const SignUp = () => {
             </div>
 
             <input
+                 {...register("password", {
+                    required: {
+                      value: true,
+                      message: "Password is Required",
+                    },
+                    minLength: {
+                      value: 6,
+                      message: "Must be 6 characters or longer",
+                    },
+                  })}
               type="password"
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md  dark:text-black dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             />
+            <label className="label">
+                {errors.password?.type === "required" && (
+                  <span className="label-text-alt text-red-500">
+                    {errors.password.message}
+                  </span>
+                )}
+                {errors.password?.type === "minLength" && (
+                  <span className="label-text-alt text-red-500">
+                    {errors.password.message}
+                  </span>
+                )}
+              </label>
           </div>
+          {signInError}
 
           <div className="mt-6">
             <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
