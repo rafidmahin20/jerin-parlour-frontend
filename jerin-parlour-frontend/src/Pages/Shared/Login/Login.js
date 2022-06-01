@@ -1,9 +1,30 @@
 import React from "react";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { Helmet } from "react-helmet-async";
-import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useLocation, useNavigate } from "react-router-dom";
+import auth from "../Firebase/Firebase.init";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [
+    signInWithEmailAndPassword,
+    user,
+    loading,
+    error,
+  ] = useSignInWithEmailAndPassword(auth);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  const location = useLocation();
+  let from = location.state?.from?.pathname || "/";
+  useEffect(() => {
+    if (token) {
+      navigate(from, { replace: true });
+    }
+  }, [from, navigate]);
   const navigateToSignUp = () => {
     navigate("/signup");
   };
